@@ -40,7 +40,7 @@ class HighwayEnv(AbstractEnv):
     DIFFICULTY_LEVELS = {
         "EASY": {
             "lanes_count": 2,
-            "vehicles_count": 5,
+            "vehicles_count": 1,
             "duration": 20
         },
         "MEDIUM": {
@@ -57,7 +57,7 @@ class HighwayEnv(AbstractEnv):
 
     def __init__(self):
         config = self.DEFAULT_CONFIG.copy()
-        config.update(self.DIFFICULTY_LEVELS["HARD"])
+        config.update(self.DIFFICULTY_LEVELS["EASY"])
         super(HighwayEnv, self).__init__(config)
         self.steps = 0
         self.reset()
