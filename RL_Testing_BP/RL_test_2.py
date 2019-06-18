@@ -10,8 +10,8 @@ env.reset()
 
 LEARNING_RATE = 0.1
 DISCOUNT = 0.95
-EPISODES = 25000
-SHOW_EVERY = 100
+EPISODES = 10000
+SHOW_EVERY = 1000
 EPSILON = 0.5
 START_EPSILON_DECAYING = 1
 END_EPSILON_DECAYING = EPISODES // 2
@@ -23,7 +23,7 @@ print(env.observation_space.low)
 print(env.action_space.n)
 
 #DISCRETE_OS_SIZE = [20] * len(env.observation_space.high)
-DISCRETE_OS_SIZE = [5] * 10
+DISCRETE_OS_SIZE = [6] * 10
 print(DISCRETE_OS_SIZE)
 discrete_os_win_size = (env.observation_space.high[0:10] - env.observation_space.low[0:10]) / DISCRETE_OS_SIZE
 
@@ -31,7 +31,7 @@ print(discrete_os_win_size)
 
 q_table = np.random.uniform(low=-2, high=0, size=(DISCRETE_OS_SIZE + [env.action_space.n]))
 
-#q_table = np.load("q_tables_-q_table.npy")
+#q_table = np.load("q_tables_Jun_18.npy")
 print(q_table.shape)
 # print(q_table)
 
@@ -75,11 +75,13 @@ for episode in range(EPISODES):
         else:
             action = np.random.randint(0, env.action_space.n)
 
+        #action = np.argmax(q_table[discrete_state])
         new_state, reward, done, info = env.step(action)
 
         episode_reward += reward
 
         new_state = new_state[0:10]
+        # print("State space : {}".format(new_state))
         new_discrete_state = get_descrete_state(new_state)
         # print("New state : {}".format(new_state))
         if render:
@@ -107,7 +109,7 @@ for episode in range(EPISODES):
     ep_rewards.append(episode_reward)
 
     if not episode % SHOW_EVERY:
-        np.save("q_tables_-q_table.npy", q_table)
+        np.save("q_tables_Jun_18_Part_2.npy", q_table)
 
         average_reward = sum(ep_rewards[-SHOW_EVERY:]) / len(ep_rewards[-SHOW_EVERY:])
         aggr_ep_rewards["ep"].append(episode)

@@ -15,7 +15,7 @@ class HighwayEnv(AbstractEnv):
         staying on the rightmost lanes and avoiding collisions.
     """
 
-    COLLISION_REWARD = -1
+    COLLISION_REWARD = -10
     """ The reward received when colliding with a vehicle."""
     RIGHT_LANE_REWARD = 0.1
     """ The reward received when driving on the right-most lanes, linearly mapped to zero for other lanes."""
