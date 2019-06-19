@@ -17,11 +17,11 @@ class HighwayEnv(AbstractEnv):
 
     COLLISION_REWARD = -10
     """ The reward received when colliding with a vehicle."""
-    RIGHT_LANE_REWARD = 0.1
+    RIGHT_LANE_REWARD = 0
     """ The reward received when driving on the right-most lanes, linearly mapped to zero for other lanes."""
     HIGH_VELOCITY_REWARD = 0.4
     """ The reward received when driving at full speed, linearly mapped to zero for lower speeds."""
-    LANE_CHANGE_REWARD = -0
+    LANE_CHANGE_REWARD = 0
     """ The reward received at each lane change action."""
 
     DEFAULT_CONFIG = {
@@ -41,7 +41,7 @@ class HighwayEnv(AbstractEnv):
         "EASY": {
             "lanes_count": 2,
             "vehicles_count": 1,
-            "duration": 20
+            "duration": 200
         },
         "MEDIUM": {
             "lanes_count": 3,
