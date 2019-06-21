@@ -8,7 +8,7 @@ from keras.layers import Dense
 from keras.optimizers import Adam
 import highway_env
 
-EPISODES = 1000
+EPISODES = 10000
 
 class DQNAgent:
 	def __init__(self, state_size, action_size):
@@ -65,6 +65,7 @@ if __name__ == "__main__":
 	state_size = env.observation_space.shape[0]
 	action_size = env.action_space.n 
 	agent = DQNAgent(state_size, action_size)
+	agent.load("DQN_10_OBS.h5")
 	done = False
 	batch_size = 32
 	counter = 0
@@ -88,8 +89,8 @@ if __name__ == "__main__":
 				agent.replay(batch_size)
 
 			
-			if e % 100 == 0:
-				agent.save("DQN.h5")
+			if e % 500 == 0:
+				agent.save("DQN_HARD.h5")
 				render = True
 			
 			if counter >= 5:

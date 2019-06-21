@@ -17,11 +17,11 @@ class HighwayEnv(AbstractEnv):
 
     COLLISION_REWARD = -10
     """ The reward received when colliding with a vehicle."""
-    RIGHT_LANE_REWARD = 0
+    RIGHT_LANE_REWARD = 2
     """ The reward received when driving on the right-most lanes, linearly mapped to zero for other lanes."""
     HIGH_VELOCITY_REWARD = 0.4
     """ The reward received when driving at full speed, linearly mapped to zero for lower speeds."""
-    LANE_CHANGE_REWARD = 0
+    LANE_CHANGE_REWARD = 1
     """ The reward received at each lane change action."""
 
     DEFAULT_CONFIG = {
@@ -40,8 +40,8 @@ class HighwayEnv(AbstractEnv):
     DIFFICULTY_LEVELS = {
         "EASY": {
             "lanes_count": 2,
-            "vehicles_count": 1,
-            "duration": 200
+            "vehicles_count": 10,
+            "duration": 20
         },
         "MEDIUM": {
             "lanes_count": 3,
@@ -57,7 +57,7 @@ class HighwayEnv(AbstractEnv):
 
     def __init__(self):
         config = self.DEFAULT_CONFIG.copy()
-        config.update(self.DIFFICULTY_LEVELS["EASY"])
+        config.update(self.DIFFICULTY_LEVELS["HARD"])
         super(HighwayEnv, self).__init__(config)
         self.steps = 0
         self.reset()

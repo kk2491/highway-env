@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	state_size = env.observation_space.shape[0]
 	action_size = env.action_space.n 
 	agent = DQNAgent(state_size, action_size)
-	agent.load("DQN.h5")
+	agent.load("DQN_10_OBS.h5")
 	done = False
 	batch_size = 32
 	counter = 0
@@ -77,6 +77,7 @@ if __name__ == "__main__":
 				env.render()
 			
 			action = agent.act(state)
+			#print("Action taken : {}".format(action))
 			next_state, reward, done, info = env.step(action)
 			reward = reward if not done else -10
 			next_state = np.reshape(next_state, [1, state_size])
