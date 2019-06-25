@@ -16,7 +16,7 @@ class DQNAgent:
 		self.action_size = action_size
 		self.memory = deque(maxlen = 2000)
 		self.gamma = 0.95
-		self.epsilon = 1.0
+		self.epsilon = 0.0
 		self.epsilon_min = 0.01
 		self.epsilon_decay = 0.995
 		self.learning_rate = 0.001
@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	state_size = env.observation_space.shape[0]
 	action_size = env.action_space.n 
 	agent = DQNAgent(state_size, action_size)
-	agent.load("DQN_10_OBS.h5")
+	agent.load("DQN_HARD.h5")
 	done = False
 	batch_size = 32
 	counter = 0

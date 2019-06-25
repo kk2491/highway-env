@@ -72,32 +72,31 @@ if __name__ == "__main__":
 	counter = 0
 	episode_rewards = []
 	for e in range(EPISODES):
+		done = False
 		state = env.reset()
 		state = np.reshape(state, [1, state_size])
-		for time in range(500):
+		while not done:
 			if render == True:
 				env.render()
 			action = agent.act(state)
 			next_state, reward, done, info = env.step(action)
-			reward = reward if not done else -10
+			
 			next_state = np.reshape(next_state, [1, state_size])
 			agent.remember(state, action, reward, next_state, done)
 			state = next_state
-			if done:
-				print("Episode : {}/{} || Score : {} || Reward : {} || Epsilon : {}"
-					 .format(e, EPISODES, time, reward, agent.epsilon))
-				break
+			
 			if len(agent.memory) > batch_size:
 				agent.replay(batch_size)
-
 			
-			if e % 500 == 0:
+			if e % 50 == 0:
 				agent.save("DQN_HARD_REWARD_CHANGE.h5")
 				render = True
 			
 			if counter >= 5:
             			render = False
             			counter = 0
+		
+		print("Episode : {}/{} || Reward : {} || Epsilon : {}".format(e, EPISODES, reward, agent.epsilon))
 		
 		episode_rewards.append(reward)
 		counter += 1
